@@ -10,7 +10,7 @@ import Summary from "../components/Form/Summary";
 import Projects from "../components/Form/Projects";
 import Education from "../components/Form/Education";
 import Certification from "../components/Form/certification";
-import '../styles/globals.css';
+
 
 const ResumeContext = createContext(DefaultResumeData);
 
