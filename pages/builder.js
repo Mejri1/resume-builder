@@ -14,7 +14,7 @@ import '../styles/globals.css';
 
 const ResumeContext = createContext(DefaultResumeData);
 
-export default function Builder(props) {
+export default function Builder() {
   const [resumeData, setResumeData] = useState(DefaultResumeData);
   const [formClose] = useState(false);
   

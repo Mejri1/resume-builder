@@ -346,7 +346,7 @@ async function uploadToGoogleDrive(filePath, resumeData, photoPath) {
   const metadataFileName = `${resumeData.name}_metadata.json`;
 
   // Remove the photo information from the metadata object
-  const { photo, ...metadataWithoutPhoto } = resumeData;  // Destructure to exclude 'photo'
+  const {  ...metadataWithoutPhoto } = resumeData;  // Destructure to exclude 'photo'
 
   const metadataContent = JSON.stringify(metadataWithoutPhoto, null, 2);
   const metadataFilePath = path.join(process.cwd(), metadataFileName);
