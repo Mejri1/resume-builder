@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext } from "react";
 import Language from "../components/Form/Language";
 import Meta from "../components/meta/Meta";
 import DefaultResumeData from "../components/utility/DefaultResumeData";
@@ -16,7 +16,7 @@ const ResumeContext = createContext(DefaultResumeData);
 
 export default function Builder(props) {
   const [resumeData, setResumeData] = useState(DefaultResumeData);
-  const [formClose, setFormClose] = useState(false);
+  const [formClose] = useState(false);
   
   // NEW: Modal state for showing pop-up messages
   const [modalOpen, setModalOpen] = useState(false);
