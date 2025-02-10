@@ -244,12 +244,13 @@ function generateResumeHtml(data) {
 
 
 // Fonction pour générer un PDF avec Puppeteer
+
 async function generatePdf(html) {
   const browser = await chromium.puppeteer.launch({
-    args: chromium.args,
+    args: [...chromium.args, "--no-sandbox", "--disable-setuid-sandbox"],
     defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath,
-    headless: true,
+    executablePath: await chromium.executablePath || "/usr/bin/chromium",
+    headless: chromium.headless,
   });
 
   const page = await browser.newPage();
@@ -258,6 +259,7 @@ async function generatePdf(html) {
   await browser.close();
   return pdfBuffer;
 }
+
 
 
 // Fonction pour uploader le PDF sur Google Drive
