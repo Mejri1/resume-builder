@@ -1,7 +1,8 @@
-import puppeteer from "puppeteer";
+import chromium from "chrome-aws-lambda";
 import { google } from "googleapis";
 import fs from "fs-extra";
 import path from "path";
+
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -244,13 +245,20 @@ function generateResumeHtml(data) {
 
 // Fonction pour générer un PDF avec Puppeteer
 async function generatePdf(html) {
-  const browser = await puppeteer.launch();
+  const browser = await chromium.puppeteer.launch({
+    args: chromium.args,
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await chromium.executablePath,
+    headless: true,
+  });
+
   const page = await browser.newPage();
   await page.setContent(html, { waitUntil: "load" });
   const pdfBuffer = await page.pdf({ format: "A4" });
   await browser.close();
   return pdfBuffer;
 }
+
 
 // Fonction pour uploader le PDF sur Google Drive
 async function uploadToGoogleDrive(filePath, resumeData, photoPath) {
